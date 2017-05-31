@@ -8,15 +8,6 @@ In a terminal, having installed numpy and scipy, run
 python inclino.py example.csv
 ```
 
-where `example.csv` is a csv file containing inclination measurement series as columns, just as `example.csv` looks like:
+where `example.csv` is a csv file containing inclination measurement series as columns, just as can be seen in `example.csv`. The script will ask for a bunch of parameters which are defined in the figure below:
 
-
-```
-1.163,2.225
-1.400,1.675
-2.438,0.075
-3.688,-1.088
-3.575,-1.250
-3.400,-1.075
-...etc.
-```
+![Inclino Parameter Definition Sketch](bild.png)
