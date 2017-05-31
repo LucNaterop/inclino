@@ -1,7 +1,4 @@
-## Inclino
-Inclinometer collision detection script in python
-
-## Usage
+# Usage
 In a terminal, having installed numpy and scipy, run
 
 ```
