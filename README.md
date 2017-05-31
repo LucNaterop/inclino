@@ -2,7 +2,7 @@
 Inclinometer collision detection script in python
 
 ## Usage
-Simply run p
+In a terminal, having installed numpy and scipy, run
 
 ```
 python inclino.py example.csv
@@ -18,5 +18,5 @@ where `example.csv` is a csv file containing inclination measurement series as c
 3.688,-1.088
 3.575,-1.250
 3.400,-1.075
-....and so on...
+...etc.
 ```
