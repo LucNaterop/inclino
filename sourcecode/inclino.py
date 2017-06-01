@@ -12,90 +12,96 @@ from scipy.interpolate import CubicSpline
 
 print('Inclino version 0.5 started. ')
 
-# ask for csv file
-file = input("enter name of csv file: ")
+readAnotherFile = True
+while readAnotherFile:
 
-# get Neigung
-N_all = np.genfromtxt(file, delimiter=',')
-print(str(N_all.shape[1]) + ' data series found in the csv file. ')
+	# ask for csv file
+	file = input("enter name of csv file: ")
 
-# Parameters
-dt = input("dt in m (default: 0.5) =  ")
-if(dt==''):
-	dt = 0.5
-else:
-	dt = float(dt)
+	# get Neigung
+	N_all = np.genfromtxt(file, delimiter=',')
+	print(str(N_all.shape[1]) + ' data series found in the csv file. ')
 
-W = input("W in mm (default: 21) =  ")
-if(W==''):
-	W = 21
-else:
-	W = float(W)
+	# Parameters
+	dt = input("dt in m (default: 0.5) =  ")
+	if(dt==''):
+		dt = 0.5
+	else:
+		dt = float(dt)
 
-L = input("L in m (default: 1) = ")
-if(L==''):
-	L = 1
-else:
-	L = float(L)
+	W = input("W in mm (default: 21) =  ")
+	if(W==''):
+		W = 21
+	else:
+		W = float(W)
 
-S = input("S in mm (default: 20) = ")
-if(S==''):
-	S = 20
-else:
-	S = float(S)
+	L = input("L in m (default: 1) = ")
+	if(L==''):
+		L = 1
+	else:
+		L = float(L)
 
-D = input("D in mm (default: 60) = ")
-if(D==''):
-	D = 60
-else:
-	D = float(D)
+	S = input("S in mm (default: 20) = ")
+	if(S==''):
+		S = 20
+	else:
+		S = float(S)
 
-def computeBothSidedA(N):
-	amount = len(N)
-	# compute Tiefe
-	T = np.linspace(0,amount*dt,amount+1)
+	D = input("D in mm (default: 60) = ")
+	if(D==''):
+		D = 60
+	else:
+		D = float(D)
 
-	# compute Auslenkung
-	Auslenkung = np.zeros(amount+1)
-	for i in range(amount):
-		Auslenkung[i+1] = Auslenkung[i] + dt*N[i]
+	def computeBothSidedA(N):
+		amount = len(N)
+		# compute Tiefe
+		T = np.linspace(0,amount*dt,amount+1)
 
-	# cubic spline interpolation
-	spline = CubicSpline(T,Auslenkung)
-	x_large = np.linspace(-0,10,100)
-	ay = spline(x_large)
+		# compute Auslenkung
+		Auslenkung = np.zeros(amount+1)
+		for i in range(amount):
+			Auslenkung[i+1] = Auslenkung[i] + dt*N[i]
 
-	def beule(x):
-		spline(x)-(spline(x))
+		# cubic spline interpolation
+		spline = CubicSpline(T,Auslenkung)
+		x_large = np.linspace(-0,10,100)
+		ay = spline(x_large)
 
-	def B(x):
-		return W-spline(x)+(spline(x-L/2) + spline(x+L/2))/2
+		def beule(x):
+			spline(x)-(spline(x))
 
-	def A(x):
-		return B(x)-S/2
+		def B(x):
+			return W-spline(x)+(spline(x-L/2) + spline(x+L/2))/2
 
-	fig = plt.figure()
-	ax = plt.subplot(111)
+		def A(x):
+			return B(x)-S/2
 
-	ax.plot(T,Auslenkung,'o',label='Deflection')
-	ax.plot(x_large,ay, label='Deflection (interpolated)')
-	ax.plot(x_large,A(x_large), label='A(t) first side')
-	ax.plot(x_large,D-A(x_large), label='A(t) second side')
-	plt.xlabel('depth (m)')
-	plt.ylabel('mm')
-	box = ax.get_position()
-	ax.set_position([box.x0, box.y0, box.width * 0.8, box.height])
-	ax.legend(loc='center left', bbox_to_anchor=(1, 0.5), prop={'size':9})
-	plt.grid()
-	plotname = str(counter)+'.pdf'
-	print('saving ' + plotname)
-	fig.savefig(str(counter)+'.pdf')
+		fig = plt.figure()
+		ax = plt.subplot(111)
 
-print('computing and writing plots...')
-counter = 1
-for i in range(0,N_all.shape[1]):
-	computeBothSidedA(N_all[:,i])
-	counter = counter+1
+		ax.plot(T,Auslenkung,'o',label='Deflection')
+		ax.plot(x_large,ay, label='Deflection (interpolated)')
+		ax.plot(x_large,A(x_large), label='A(t) first side')
+		ax.plot(x_large,D-A(x_large), label='A(t) second side')
+		plt.xlabel('depth (m)')
+		plt.ylabel('mm')
+		box = ax.get_position()
+		ax.set_position([box.x0, box.y0, box.width * 0.8, box.height])
+		ax.legend(loc='center left', bbox_to_anchor=(1, 0.5), prop={'size':8})
+		plt.grid()
+		plotname = file[:-4]+str(counter)+'.pdf'
+		print('saving ' + plotname)
+		fig.savefig(plotname)
+		print('done.')
 
-print('done.')
+	print('computing and writing plots...')
+	counter = 1
+	for i in range(0,N_all.shape[1]):
+		computeBothSidedA(N_all[:,i])
+		counter = counter+1
+
+	readAnotherFile = input('Read another csv file? (Yes/No): ').lower() == 'yes'
+
+print('Exiting.')
 
