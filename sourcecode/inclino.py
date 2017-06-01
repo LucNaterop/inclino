@@ -1,22 +1,22 @@
 
 '''
-	Inclino Script
+	Inclino v0.5
 	Written by Luca Naterop
 	Zürich, 2017
 	Questions, suggestions and comments to luca@naterop.net
 '''
 
-import sys
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.interpolate import CubicSpline
-import pylab 
 
-if(len(sys.argv) == 1):
-	sys.exit('Please provide a valid csv file')
+print('Inclino version 0.5 started. ')
+
+# ask for csv file
+file = input("enter name of csv file: ")
 
 # get Neigung
-N_all = np.genfromtxt(sys.argv[1], delimiter=',')
+N_all = np.genfromtxt(file, delimiter=',')
 print(str(N_all.shape[1]) + ' data series found in the csv file. ')
 
 # Parameters
