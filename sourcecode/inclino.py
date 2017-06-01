@@ -78,20 +78,34 @@ while readAnotherFile:
 			return B(x)-S/2
 
 		fig = plt.figure()
-		ax = plt.subplot(111)
+		
 
-		ax.plot(T,Auslenkung,'o',label='Deflection')
-		ax.plot(x_large,ay, label='Deflection (interpolated)')
-		ax.plot(x_large,A(x_large), label='A(t) first side')
-		ax.plot(x_large,D-A(x_large), label='A(t) second side')
+
+		ax = plt.subplot(211)
+		ax.plot(T,Auslenkung,'o',label='Deviation')
+		ax.plot(x_large,ay, label='Deviation (interpolated)')
 		plt.xlabel('depth (m)')
 		plt.ylabel('mm')
+		# plt.title('Deviation from vertial line')
 		box = ax.get_position()
 		ax.set_position([box.x0, box.y0, box.width * 0.8, box.height])
 		ax.legend(loc='center left', bbox_to_anchor=(1, 0.5), prop={'size':8})
 		plt.grid()
+
+		ax = plt.subplot(212)
+		ax.plot(x_large,A(x_large), label='A(t) first side')
+		ax.plot(x_large,D-A(x_large), label='A(t) second side')
+		plt.xlabel('depth (m)')
+		plt.ylabel('mm')
+		# plt.title('Distance A(t)')
+		box = ax.get_position()
+		ax.set_position([box.x0, box.y0, box.width * 0.8, box.height])
+		ax.legend(loc='center left', bbox_to_anchor=(1, 0.5), prop={'size':8})
+		plt.grid()
+
 		plotname = file[:-4]+str(counter)+'.pdf'
 		print('saving ' + plotname)
+		plt.show()
 		fig.savefig(plotname)
 		print('done.')
 
