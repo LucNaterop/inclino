@@ -4,9 +4,13 @@ Download [inclino.exe](https://www.dl.dropboxusercontent.com/s/u19pco0bwyio1qn/i
 
 Run `inclino.exe`. It might take 20-30 seconds before the script runs in the command line. 
 
-It will ask for a file `example.csv` which is a csv file containing inclination measurement series as columns, just as can be seen in `example.csv`. Make sure that the csv files are in the same folder as `inclino.exe`. 
+It will ask for a csv-file which has the following structure:
+ - First column: The depth of inclination measurements
+ - Second column: The inclination measurements
 
-The script will ask for a bunch of parameters which are defined in the figure below. It will then go on to compute A(t) and save resulting graphs in the working directory. 
+An example of such a file can be viewed in `example.csv`.
+
+The script will ask for a bunch of parameters which are defined in the figure below. It will then go on to compute A(t) which is the distance from the instrument axis to the borehole wall. The two resulting lines represent the distance for both sides. 
 
 ![Inclino Parameter Definition Sketch](parameter_definitions.png)
 
