@@ -15,15 +15,20 @@ The script will ask for a bunch of parameters which are defined in the figure be
 ![Inclino Parameter Definition Sketch](parameter_definitions.png)
 
 # Usage (Mac/Linux)
+0. Open a terminal
 1. Clone this repo 
+```
+git clone https://github.com/LucNaterop/inclino
+```
 
 2. Make sure you have numpy and scipy installed:
 ```
 pip install numpy scipy
 ```
 
-3. run 
+3. cd into the directory and run the script 
 ```
+cd inclino/sourcecode
 python inclino.py
 ```
 
