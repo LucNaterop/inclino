@@ -89,7 +89,7 @@ while readAnotherFile:
 
 		plotname = file[:-4]+'.pdf'
 		print('saving ' + plotname)
-		plt.show()
+		# plt.show()
 		fig.savefig(plotname)
 		print('done.')
 
