@@ -10,7 +10,7 @@ It will ask for a csv-file which has the following structure:
 
 An example of such a file can be viewed in `example.csv`.
 
-The script will ask for a bunch of parameters which are defined in the figure below. It will then go on to compute A(t) which is the distance from the instrument axis to the borehole wall. The two resulting lines represent the distance for both sides. 
+The script will ask for a bunch of parameters which are defined in the figure below. It will then go on to compute A(t) which is the distance from the instrument axis to the borehole wall. A pdf with the resulting graphs are saved in the same location as the csv file. The two resulting lines represent the distance for both sides. 
 
 ![Inclino Parameter Definition Sketch](parameter_definitions.png)
 
