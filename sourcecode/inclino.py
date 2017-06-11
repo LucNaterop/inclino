@@ -37,7 +37,7 @@ while readAnotherFile:
 		D = float(D)
 
 	def computeBothSidedA(T_Neigung, Neigung):
-		Neigung = Neigung*10
+		Neigung = Neigung
 		amount = len(T_Neigung)
 		L = (T_Neigung[1]-T_Neigung[0])
 
